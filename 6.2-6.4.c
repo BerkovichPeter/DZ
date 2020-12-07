@@ -71,7 +71,7 @@ char *getFileRelativeName(const char* fullName, size_t sz) {
 
 //у нас может быть файл file, который находится в директори dir
 //чтобы его получить нам нужен путь dir/file
-//для этого хорошо бы написат функцию которая будет джойнить названия тк делать мы это будем часто
+//для этого хорошо бы написать функцию которая будет джойнить названия 
 char *joinPath(const char *left, const char *right) {
     //получим размеры названий
     size_t leftSz = strlen(left), rightSz = strlen(right);
