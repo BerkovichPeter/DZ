@@ -31,7 +31,7 @@ int copyFile(const char* src, const char *dst) {
         return -1;
     }
     //открем dst файл на запись
-    //trunc флаг нужен для того, чтобы урезать длинну файла до 0, если он существует
+    //trunc флаг нужен для того, чтобы урезать длину файла до 0, если он существует
     int dstFD = open(dst, O_CREAT | O_WRONLY | O_TRUNC, S_IWUSR);
     if(dstFD == -1) {
         //при создании дескриптора произошла ошибка,
