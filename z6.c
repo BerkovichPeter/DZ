@@ -52,18 +52,18 @@ char *getCurrUserName(){
 //напишем для этого функцию
 char *getFileRelativeName(const char* fullName, size_t sz) {
     if(!fullName || !sz) return NULL;
-    size_t left = sz - 1;
 
-    while(left && fullName[left] != '/') --left;
+    char *lastSlash = strrchr(fullName, '/');
 
-    if(fullName[left] != '/') {
+    if(!lastSlash || *lastSlash != '/') {
         //некоректное имя
         return NULL;
     }
 
-    char *res = (char *)malloc((sz  - left) * sizeof(char));
-    memcpy(res, fullName + left + 1, sz - left - 1);
-    res[sz - left - 1] = 0;
+    size_t id = (size_t)(lastSlash - fullName); //индекс последнего символа '/'
+    char *res = (char *)malloc((sz  - id) * sizeof(char));
+    memcpy(res, lastSlash + 1, sz - id - 1);
+    res[sz - id - 1] = 0;
     return res;
 
 }
