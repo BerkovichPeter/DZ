@@ -53,34 +53,7 @@ void printProcInfo() {
     printf("---effective group---\n");
     printGroupInfo(getegid());
 
-    //получим все дополнительные идентификаторы групп процесса
-    //для этого запросим максимальное число возможных групп процесса
-    /*gid_t *list = (gid_t*)malloc((unsigned) sysconf(_SC_NGROUPS_MAX) * sizeof(gid_t));
-    int count = (int) getgroups((int)sysconf(_SC_NGROUPS_MAX), list);
-
-    //обработаем ошибки
-    if(count == -1) {
-        fprintf(stderr, "get groups error:");
-        if(errno == EFAULT){
-            fprintf(stderr, "EFAULT");
-        } else if(errno == EINVAL) {
-            fprintf(stderr, "EINVAL");
-        } else if(errno == EPERM) {
-            fprintf(stderr, "EPERM");
-        } else {
-            fprintf(stderr, "unknown error");
-        }
-        fprintf(stderr, "\n");
-        return;
-    }
-
-    //напечатаем информацию про все группы (дополнительные)
-    //getgroups:
-    printf("---all groups---\n");
-    for(int i = 0; i < count; ++i) {
-        printGroupInfo(list[i]);
-    }*/
-
+   
 }
 
 int main() {
