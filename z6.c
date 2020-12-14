@@ -99,27 +99,37 @@ char *joinPath1(const char *left, const char *right, size_t rightSz) {
 
     return joined;
 }
+//уберем конструкции типа /./../ из строки *path
+void refactorPathToRealPath(char **path) {
+    //сначала запишем корректный путь в временный буффер res, потом скопируем оттуда в *path
+    char res[PATH_MAX];
+    realpath(*path, res);
+    size_t sz = strlen(res);
+    memcpy(*path, res, sz);
+    (*path)[sz] = 0;
+}
 
 char *getFullName(const char *dir) {
     if(dir[0] == '/') {
         size_t sz = strlen(dir);
         char *res = (char *)malloc(sz * sizeof(char));
         memcpy(res, dir, sz);
+        refactorPathToRealPath(&res);
         return res;
     }
     if(dir[0] == '~') {
         char *usrName = getCurrUserName();
         char *res = joinPath(usrName, dir + 2);
         free(usrName);
+        refactorPathToRealPath(&res);
         return res;
     }
     char *currDir = getCurrDir();
     char *res = joinPath(currDir, dir);
     free(currDir);
+    refactorPathToRealPath(&res);
     return res;
 }
-
-
 
 int main(int argc, const char **argv) {
     if(argc < 2) {
